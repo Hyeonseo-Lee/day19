@@ -1,47 +1,24 @@
-# def change2(num):
-#
-#     rest = num % 2
-#     quota = num // 2
-#     if quota != 0:
-#         array.append(rest)
-#         change2(quota)
-#     elif quota == 0:
-#         array.append(1)
-#         return
-#     return array
-#
-#
-# if __name__ == '__main__':
-#     array = []
-#
-#     number = int(input("10진수 입력 --> "))
-#     print("2진수 : ", end = '')
-#     a = change2(number)
-#     print("".join(list(map(str,a[::-1]))))
-#     # map (func, 리스트) : 리스트 개별 요소에 저 함수를 적용
-#     # for i in range(len(change2(number))):
-#     #     print(change2(number)[i], end = '')
-#
-#
-#
-#     print("\n8진수 : ")
-#     print("16진수 : ")
-
-def nota(bs, n):
-    if n < bs:
-        print(numberch[n], end=' ')
-    else:
-        nota(bs, n // bs)
-        print(numberch[n % bs], end=' ')
+from tkinter import *
 
 
-numberch = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-numberch += ['A', 'B', 'C', 'D', 'E', 'F']
+def draw(x, y, sz) :
+	if sz >= 30 :
+		draw(x, y, sz / 2)
+		draw(x + sz / 2, y, sz / 2)
+		draw(x + sz / 4, int(y - sz * (3 ** 0.5) / 4), sz / 2)
+	else :
+		canvas.create_polygon (x, y, x + sz, y, x + sz / 2, y - sz * (3 ** 0.5) / 2, fill ='red', outline ="red")
 
-number = int(input('10진수 입력 -->'))
-print('\n 2진수 : ', end=' ')
-nota(2, number)
-print('\n 8진수 : ', end=' ')
-nota(8, number)
-print('\n16진수 : ', end=' ')
-nota(16, number)
+
+ws = 1000
+rd = 400
+
+
+window = Tk()
+window.title("삼각형 모양의 프랙탈")
+canvas = Canvas(window, height = ws, width = ws, bg ='white')
+
+draw(ws / 5, ws / 5 * 4, ws * 2 / 3)
+
+canvas.pack()
+window.mainloop()
