@@ -1,24 +1,19 @@
-from tkinter import *
+
+def scorest(array) :
+	n = len(array)
+	for end in range(1, n) :
+		for current in range(end, 0, -1) :
+			if ( array[current - 1][1] > array[current][1]) :
+				array[current - 1], array[current] = array[current], array[current - 1]
+	return array
 
 
-def draw(x, y, sz) :
-	if sz >= 30 :
-		draw(x, y, sz / 2)
-		draw(x + sz / 2, y, sz / 2)
-		draw(x + sz / 4, int(y - sz * (3 ** 0.5) / 4), sz / 2)
-	else :
-		canvas.create_polygon (x, y, x + sz, y, x + sz / 2, y - sz * (3 ** 0.5) / 2, fill ='red', outline ="red")
+score_array = [['수호', 88], ['시우민', 99], ['디오', 71], ['영탁', 78], ['영웅', 67], ['민호', 92]]
 
+print('정렬 전 -->', score_array)
+score_array = scorest(score_array)
+print('정렬 후 -->', score_array)
 
-ws = 1000
-rd = 400
-
-
-window = Tk()
-window.title("삼각형 모양의 프랙탈")
-canvas = Canvas(window, height = ws, width = ws, bg ='white')
-
-draw(ws / 5, ws / 5 * 4, ws * 2 / 3)
-
-canvas.pack()
-window.mainloop()
+print('## 성적별 조 편성표 ##')
+for i in range(len(score_array) // 2) :
+	print(score_array[i][0], ':', score_array[len(score_array) - 1 - i][0])
