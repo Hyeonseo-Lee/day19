@@ -1,19 +1,29 @@
 
-def scorest(array) :
+def sort(array) :
 	n = len(array)
-	for end in range(1, n) :
-		for current in range(end, 0, -1) :
-			if ( array[current - 1][1] > array[current][1]) :
-				array[current - 1], array[current] = array[current], array[current - 1]
+	for i in range(0, n-1) :
+		min = i
+		for k in range(i+1, n) :
+			if (array[min] > array[k]) :
+				min = k
+		tmp = array[i]
+		array[i] = array[min]
+		array[min] = tmp
+
 	return array
 
+ary2 = [[55, 33, 250, 44],
+		 [88,  1,  67, 23],
+		 [199,222, 38, 47],
+		 [155,145, 20, 99]]
+narray = []
 
-score_array = [['수호', 88], ['시우민', 99], ['디오', 71], ['영탁', 78], ['영웅', 67], ['민호', 92]]
 
-print('정렬 전 -->', score_array)
-score_array = scorest(score_array)
-print('정렬 후 -->', score_array)
+for i in range(len(ary2)) :
+	for k in range(len(ary2[i])) :
+		narray.append(ary2[i][k])
 
-print('## 성적별 조 편성표 ##')
-for i in range(len(score_array) // 2) :
-	print(score_array[i][0], ':', score_array[len(score_array) - 1 - i][0])
+print('1차원 변경 후, 정렬 전 -->', narray)
+narray = sort(narray)
+print('1차원 변경 후, 정렬 후 -->', narray)
+print('중앙값 --> ', narray[len(narray) // 2])
