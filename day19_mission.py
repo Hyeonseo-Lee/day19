@@ -1,62 +1,40 @@
-import random
-import time
+# class Pokemon:
+# 	def __init__(self, owner, name, skills):
+# 		self.owner = owner
+# 		self.name = name
+# 		self.skills = skills.split('/')
+#
+# 	def info(self):
+# 		print(f'{self.owner}의 포켓몬은 {self.name}')
+# 		skill_list = []
+# 		for i in range(len(self.skills)):
+# 			print(f'{i+1}: {self.skills[i]}')
+#
+# 	def attack(self, idx):
+# 		print(f'{self.skills[idx]} 공격 시전!')
+#
+# class Ggoboogi(Pokemon):
+# 	def __init__ (self, owner, skills):
+# 		super().__init__(owner, skills)
+# 		self.name = "꼬부기"
+# 		print(f"self.name")
+#
+# P1 = Pokemon('한지우', '피카츄', '50만 볼트/100만 볼트/번개')
+# P1.info()
+# P1.attack(1)
 
+class Duck():
+	def __init__(self, input_name):
+		self.hidden_name = input_name
 
-def bubble(array) :
-	n = len(array)
-	for end in range(n-1, 0, -1) :
-		changeYN = False
-		for cur in range(0, end) :
-			if (array[cur] > array[cur + 1]) :
-				array[cur], array[cur + 1] = array[cur + 1], array[cur]
-				changeYN = True
-		if not changeYN :
-			break
-	return array
+	def get_name(self):
+		print('inside the getter')
+		return self.hidden_name
 
-def q_sort(array, start, end) :
-	if end <= start :
-		return
+	def set_name(self, input_name):
+		print('inside the setter')
+		self.hidden_name = input_name
+	name = property(get_name, set_name)
 
-	low = start
-	high = end
-
-	pivot = array[(low + high) // 2]
-	while low <= high :
-		while array[low] < pivot :
-			low += 1
-		while array[high] > pivot :
-			high -= 1
-		if low <= high :
-			array[low], array[high] = array[high], array[low]
-			low, high = low + 1, high - 1
-
-	mid = low
-
-	q_sort(array, start, mid - 1)
-	q_sort(array, mid, end)
-
-def quickSort(ary) :
-	q_sort(ary, 0, len(ary) - 1)
-
-
-tarray = [random.randint(10000, 99999) for _ in range(1000000)]
-tarray.sort()
-
-rnd_p = random.randint(0, len(tarray) - 1)
-print("# 데이터 개수 --> ", len(tarray))
-print("# 끼어든 위치 --> ", rnd_p)
-tarray.insert(rnd_p, tarray[-1])
-
-bubble_array = tarray[:]
-quick_array = tarray[:]
-
-start = time.time()
-bubble(bubble_array)
-end = time.time()
-print("다시 정렬 시간(버블 정렬) --> %10.3f 초" % (end-start))
-
-start = time.time()
-quickSort(quick_array)
-end = time.time()
-print("다시 정렬 시간(퀵 정렬)   --> %10.3f 초" % (end-start))
+don = Duck('Donald')
+print(don.get_name())
